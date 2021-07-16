@@ -1,0 +1,122 @@
+// css reset
+@import "./reset.scss";
+// font family
+@import url("./font.scss");
+//  variable
+@import "./variable.scss";
+
+body {
+  //   body style
+  background-color: #1e2c37;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  color: white;
+
+  // title header style
+  #title-header {
+    text-align: center;
+    padding: 1rem;
+    font-size: 8rem;
+    width: 60rem;
+  }
+
+  #title-header-aryan {
+    font-weight: bolder;
+    font-size: 10rem;
+  }
+
+  @media (min-device-width: 320px) and (max-device-width: 500px) {
+    #title-header {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      //   padding: 20px;
+      font-size: 50px;
+      width: 0;
+      line-height: 150%;
+    }
+
+    #title-header-aryan {
+      font-weight: bolder;
+      font-size: 60px;
+    }
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row-reverse;
+
+    .last-container {
+      position: relative;
+      left: 5px;
+    }
+
+    .all-cards {
+      background-color: black;
+      text-align: center;
+      padding: 20px;
+      border-radius: 5px;
+    }
+  }
+
+  #card-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .cards {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px;
+
+      .inputs {
+        input {
+          width: 40rem;
+          border: none;
+          padding: 10px;
+          font-size: 30px;
+          text-align: center;
+          outline: none;
+          border: 4px #518193 solid;
+          border-radius: 10px;
+        }
+      }
+    }
+    .target-user-name {
+      .inputs {
+        input {
+          width: 25rem;
+        }
+      }
+    }
+    .cvv2-password {
+      .inputs {
+        input {
+          width: 25rem;
+        }
+      }
+    }
+  }
+  .submit-button {
+    button {
+      width: 10rem;
+      padding: 1rem;
+      font-size: 30px;
+      border-radius: 5px;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      background-color: #f03030;
+      outline: none;
+      border: none;
+      cursor: pointer;
+    }
+    button:active {
+      border: black solid 2px;
+    }
+  }
+}
