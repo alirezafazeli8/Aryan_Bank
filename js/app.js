@@ -58,9 +58,17 @@ function validCard() {
   if (beginInputCd && targetInputCd) {
     return true;
   } else if (beginInputCd == false) {
-    alert("Begin Card Is Incorrect");
+    swal({
+      title: "Begin Card Is Incorrect",
+      text: "",
+      icon: "error",
+    });
   } else if (targetInputCd == false) {
-    alert("Target Card Is Incorrect");
+    swal({
+      title: "Target Card Is Incorrect",
+      text: "",
+      icon: "error",
+    });
   } else {
     return false;
   }
