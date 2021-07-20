@@ -11,86 +11,16 @@ const submitButton = document.getElementById("submit-btn");
 // sweet alert
 const sweetIncorrectCard = (message) => swal({ title: message, icon: "error" });
 
-// information
-let targetUserSave = [];
-
-// -----------------------------------------------------
-
-// check correct function in CardsApi
-function checkCard(whichInput, variable = "ANONYMOUS") {
-  for (let card of Object.values(cards)) {
-    const cardsFromDB = card.cardNumber.replaceAll("_", "");
-    if (whichInput.value == cardsFromDB) {
-      targetUserSave.push(card);
-      return true;
-    } else {
-      continue;
-    }
-  }
-}
-
-// console.log(checkCard(beginInput, beginUserInfo));
-checkCard(beginInput);
-console.log(targetUserSave);
-
-// -----------------------------------------------------
-
-// all begin card information
-function allBeginInfo() {
-  // begin number card
-  function beginNumberCard() {
-    // NOTE render incorrect number card
-    if (beginInput.value == "") {
-      sweetIncorrectCard("Pleas Enter Correct Number Card");
-    } else {
-      if (checkCard(beginInput) == undefined) {
-        sweetIncorrectCard("Your Begin Card Is Incorrect");
-      } else {
-        checkCard(beginInput);
-        console.log(targetUserSave[0].name);
-      }
-    }
-  }
-
-  // target number card
-  function targetNumberCard() {
-    // NOTE render incorrect number card
-    if (targetInput.value == "") {
-      sweetIncorrectCard("Pleas Enter Correct Number Card");
-    } else {
-      if (checkCard(targetInput) == undefined) {
-        sweetIncorrectCard("Your Target Card Is Incorrect");
-      } else {
-        checkCard(targetInput);
-        console.log(targetUserSave);
-      }
-    }
-  }
-
-  function similarCard() {
-    if (beginInput.value != "" && targetInput.value != "") {
-      if (beginInput.value == targetInput.value) {
-        sweetIncorrectCard("Your Target Card is Equal To Begin");
-        return false;
-      } else {
-        return true;
-      }
-    }
-  }
-
-  if (!beginNumberCard() && !targetNumberCard() && !similarCard()) {
-    return false;
-  } else {
-    return true;
-  }
-}
-
-// ----------------------------------------------------------------------------
-
+// target onblur event listener
 targetInput.onblur = function () {
+  // show target person
+  userNameInput.textContent = `Target Person : ${targetUserSave[0].name}`;
+  // remove hidden class from username input
   userNameInput.classList.remove("hidden");
 };
 
+// submit button event listener
 submitButton.addEventListener("click", function () {
   console.log(allBeginInfo());
+  console.log();
 });
