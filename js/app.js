@@ -2,87 +2,95 @@
 
 const beginInput = document.getElementById("begin-input");
 const targetInput = document.getElementById("target-input");
-const userNameInput = document.getElementById("user-name");
+const userNameInput = document.querySelector(".target-user-name");
 const moneyInput = document.getElementById("money");
 const cvv2Input = document.getElementById("cvv2-input");
 const passwordInput = document.getElementById("password-input");
 const submitButton = document.getElementById("submit-btn");
 
-// condition variable
-let beginInputCd = false;
-let targetInputCd = false;
+// sweet alert
+const sweetIncorrectCard = (message) => swal({ title: message, icon: "error" });
 
-// money valid
-let moneyValid = false;
+// information
+let targetUserSave = [];
 
-// begin user stored.
-let beginUserInfo;
-let targetUserInfo;
+// -----------------------------------------------------
 
-// check valid card
-function validCard() {
-  //check begin card
-  function checkBegin() {
-    for (let card of Object.values(cards)) {
-      const cardsAfter = card.cardNumber.replaceAll("_", "");
-      if (cardsAfter == beginInput.value) {
-        // store begin card data
-        beginUserInfo = card; // => beginUserInfo NOTE
-        beginInputCd = true; // => begin return true for condition NOTE
-        break;
-      } else {
-        continue;
-      }
+// check correct function in CardsApi
+function checkCard(whichInput, variable = "ANONYMOUS") {
+  for (let card of Object.values(cards)) {
+    const cardsFromDB = card.cardNumber.replaceAll("_", "");
+    if (whichInput.value == cardsFromDB) {
+      targetUserSave.push(card);
+      return true;
+    } else {
+      continue;
     }
-  }
-  // check target card
-  function checkTarget() {
-    for (let card of Object.values(cards)) {
-      const cardsAfter = card.cardNumber.replaceAll("_", "");
-      if (cardsAfter == targetInput.value) {
-        // store target card data
-        targetUserInfo = card; // => targetUserInfo NOTE
-        targetInputCd = true; // => target return true for condition NOTE
-        break;
-      } else {
-        continue;
-      }
-    }
-  }
-
-  // call functions
-  checkBegin();
-  checkTarget();
-
-  // return answer
-  if (beginInputCd && targetInputCd) {
-    return true;
-  } else if (beginInputCd == false) {
-    swal({
-      title: "Begin Card Is Incorrect",
-      text: "",
-      icon: "warning",
-    });
-  } else if (targetInputCd == false) {
-    swal({
-      title: "Target Card Is Incorrect",
-      text: "",
-      icon: "warning",
-    });
-  } else {
-    return false;
   }
 }
 
-function checkMoney() {
-  validCard();
-  const beginAfter = beginUserInfo.money.replace("$", "");
-  moneyValid = beginAfter > moneyInput.value;
-} // => moneyValid NOTE
+// console.log(checkCard(beginInput, beginUserInfo));
+checkCard(beginInput);
+console.log(targetUserSave);
 
-function cvv2Checker() {}
+// -----------------------------------------------------
+
+// all begin card information
+function allBeginInfo() {
+  // begin number card
+  function beginNumberCard() {
+    // NOTE render incorrect number card
+    if (beginInput.value == "") {
+      sweetIncorrectCard("Pleas Enter Correct Number Card");
+    } else {
+      if (checkCard(beginInput) == undefined) {
+        sweetIncorrectCard("Your Begin Card Is Incorrect");
+      } else {
+        checkCard(beginInput);
+        console.log(targetUserSave[0].name);
+      }
+    }
+  }
+
+  // target number card
+  function targetNumberCard() {
+    // NOTE render incorrect number card
+    if (targetInput.value == "") {
+      sweetIncorrectCard("Pleas Enter Correct Number Card");
+    } else {
+      if (checkCard(targetInput) == undefined) {
+        sweetIncorrectCard("Your Target Card Is Incorrect");
+      } else {
+        checkCard(targetInput);
+        console.log(targetUserSave);
+      }
+    }
+  }
+
+  function similarCard() {
+    if (beginInput.value != "" && targetInput.value != "") {
+      if (beginInput.value == targetInput.value) {
+        sweetIncorrectCard("Your Target Card is Equal To Begin");
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+
+  if (!beginNumberCard() && !targetNumberCard() && !similarCard()) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+// ----------------------------------------------------------------------------
+
+targetInput.onblur = function () {
+  userNameInput.classList.remove("hidden");
+};
+
 submitButton.addEventListener("click", function () {
-  validCard();
-  checkMoney();
-  console.log(moneyValid);
+  console.log(allBeginInfo());
 });
