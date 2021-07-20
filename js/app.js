@@ -61,13 +61,13 @@ function validCard() {
     swal({
       title: "Begin Card Is Incorrect",
       text: "",
-      icon: "error",
+      icon: "warning",
     });
   } else if (targetInputCd == false) {
     swal({
       title: "Target Card Is Incorrect",
       text: "",
-      icon: "error",
+      icon: "warning",
     });
   } else {
     return false;
