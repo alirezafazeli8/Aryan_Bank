@@ -1,0 +1,7 @@
+Options of Aryan :
+errors => (
+    1- Empty error.
+    2- Money Error(when money input is grater than begin money).
+    3- cvv2 Error.
+    4- Password Error.
+)
