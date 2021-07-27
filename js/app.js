@@ -74,18 +74,18 @@ function allBeginInfo() {
   }
 
   // target number card
-  // function targetNumberCard() {
-  //   // NOTE render incorrect number card
-  //   if (targetInput.value == "") {
-  //     sweetIncorrectCard("Your Target Card Is Empty");
-  //   } else {
-  //     if (checkCard(targetInput) == undefined) {
-  //       sweetIncorrectCard("Your Target Card Is Incorrect");
-  //     } else {
-  //       // checkCard(targetInput);
-  //     }
-  //   }
-  // }
+  function targetNumberCard() {
+    // NOTE render incorrect number card
+    if (targetInput.value == "") {
+      sweetIncorrectCard("Your Target Card Is Empty");
+    } else {
+      if (checkCard(targetInput) == undefined) {
+        sweetIncorrectCard("Your Target Card Is Incorrect");
+      } else {
+        // checkCard(targetInput);
+      }
+    }
+  }
 
   function similarCard() {
     if (beginInput.value != "" && targetInput.value != "") {
